@@ -1,0 +1,104 @@
+<html>
+<head>
+    <script src="jquery-1.11.min.js"></script>
+    <script type="text/javascript">
+function createOptions(options, className) {
+    for (i = 0; i < options.length; i++) {
+        var option = $("<option/>").addClass(className).
+            val(options[i]).text('$'+options[i]);
+        $("#donation_amount option:last").before(option);
+    }
+}
+
+function displayRecurring() {
+    var options = ['10.00', '25,00', '50.00'];
+    $("input[name=cmd]").val("_xclick-subscriptions");
+    $("#donation_recur").show();
+    $(".donation_once").remove();
+    createOptions(options, "donation_recurring");
+    $("#donation_amount").val(options[0]).trigger('change').attr('name', 'a3');
+}
+
+function displayOnce() {
+    var options = ['25.00', '50.00', '100.00'];
+    $("input[name=cmd]").val("_donations");
+    $("#donation_recur").hide();
+    $(".donation_recurring").remove();
+    createOptions(options, "donation_once");
+    $("#donation_amount").val(options[0]).trigger('change').attr('name', 'amount');
+}
+
+$(function() {
+    $("#donation_amount").hide();
+    $("#donation_recur").hide();
+    $("#donation_amount_other").hide();
+    $("input:radio[name=srt]").prop('checked', false);
+    
+    $("input:radio[name=srt]").change( function() {
+        $("#donation_amount").show();
+        if ($(this).val() == "0") {
+            displayRecurring();
+        } else {
+            displayOnce();
+        }
+    });
+    
+    $("#donation_amount").change( function() {
+        if ($(this).val() == 0) {
+            var attr = $(this).attr('name');
+            $("#donation_amount_other").show().attr('name', attr);
+            $(this).attr('name', '');
+        } else {
+            var attr = $("#donation_amount_other").attr('name');
+            $("#donation_amount_other").hide().attr('name', '');
+            $(this).attr('name', attr);
+        }
+    });
+    
+    $("#paypal").submit( function(e) {
+        if ($("#donation_amount").val() == 0) {
+            var val = $("#donation_amount_other").val();
+            if (!isNaN(parseFloat(val)) && isFinite(val)) {
+                return;
+            } else {
+                alert("not a number value!");
+                e.preventDefault();
+            }
+        } 
+        return;
+    });
+});
+    </script>
+</head>
+<body>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="paypal">
+<input type="hidden" name="cmd" value="">
+<input type="hidden" name="business" value="U3YNG2KLDQG8J">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value="Shalom Donation">
+<input type="hidden" name="no_note" value="1">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="src" value="1">
+<input type="hidden" name="p3" value="1">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribeCC_LG.gif:NonHosted">
+
+<label>Type of Donation</label>
+<input type="radio" name="srt" value="0">Recurring
+<input type="radio" name="srt" value="1">One-Time<br>
+<label>How often will the donation recur?</label>
+<select id="donation_recur" name="t3">
+	<option value="M" selected>Monthly </option>
+	<option value="Y">Yearly </option>
+</select><br>
+<label>Donation Amount</label>
+<select id="donation_amount" name="">
+    <option value="0">Other</option>
+</select>
+<input type="text" id="donation_amount_other" name="" maxlength="60"><br>
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+</body>
+</html>
