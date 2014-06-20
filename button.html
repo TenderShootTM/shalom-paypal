@@ -2,6 +2,7 @@
 <head>
     <script src="jquery-1.11.min.js"></script>
     <script src = "paypal.js"type="text/javascript"></script>
+    <!-- <link href="paypal.css" type="text/css"> -->
 </head>
 <body>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="paypal">
@@ -16,21 +17,41 @@
 <input type="hidden" name="currency_code" value="USD">
 <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribeCC_LG.gif:NonHosted">
 
+<div>
+<label>What would you like to give to?</label>
+<select id="donation_to">
+    <option value="General">General (Most Helpful)</option>
+    <option value="Campus Ministries +">Campus Ministries & Beyond</option>
+    <option value="Loving Neighbors">Loving Our Neighbors</option>
+    <option value="Other">Other</option>
+</select>
+</div>
+
 <label>Type of Donation</label>
 <input type="radio" name="srt" value="0">Recurring
 <input type="radio" name="srt" value="1">One-Time<br>
 
+<div id="donation_recur">
 <label>How often will the donation recur?</label>
-<select id="donation_recur" name="t3">
+<select name="t3">
 	<option value="M" selected>Monthly </option>
 	<option value="Y">Yearly </option>
 </select><br>
+<label>After how many times will the recurring donation end?</label>
+<select name="p3">
+    <option value="0" selected>Never</option>
+</select>
+</div>
 
+<div id="donation_amount" >
 <label>Donation Amount</label>
-<select id="donation_amount" name="">
+<select name="">
     <option value="0">Other</option>
 </select>
-<input type="text" id="donation_amount_other" name="" maxlength="60"><label for="donation_amount_other"></label><br>
+    <div id="donation_amount_box"><span>$</span>
+    <input type="text" id="donation_amount_other" name="" maxlength="60"><label for="donation_amount_other"></label>
+    </div>
+</div>
 
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
