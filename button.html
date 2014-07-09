@@ -12,7 +12,6 @@
 <input type="hidden" name="item_name" value="Shalom Donation">
 <input type="hidden" name="no_note" value="1">
 <input type="hidden" name="no_shipping" value="1">
-<input type="hidden" name="src" value="1">
 <input type="hidden" name="p3" value="1">
 <input type="hidden" name="currency_code" value="USD">
 <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribeCC_LG.gif:NonHosted">
@@ -27,9 +26,11 @@
 </select>
 </div>
 
+<div>
 <label>Type of Donation</label>
-<input type="radio" name="srt" value="0">Recurring
-<input type="radio" name="srt" value="1">One-Time<br>
+<input type="radio" name="src" value="1">Recurring
+<input type="radio" name="src" value="0">One-Time
+</div>
 
 <div id="donation_recur">
 <label>How often will the donation recur?</label>
@@ -38,7 +39,7 @@
 	<option value="Y">Yearly </option>
 </select><br>
 <label>After how many times will the recurring donation end?</label>
-<select name="p3">
+<select name="srt">
     <option value="0" selected>Never</option>
 </select>
 </div>

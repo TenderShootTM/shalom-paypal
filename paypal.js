@@ -1,3 +1,9 @@
+/***
+ * Paypal jQuery code
+ * @author Chris Hsu 26matrices@gmail.com
+ * @version 0.8
+ */
+
 /** Options **/
 var recurringOptions = [ 10, 25, 50 ];
 var onceOptions = [ 25, 50, 100 ];
@@ -10,7 +16,7 @@ function createOptions(options, className) {
     for (i = 0; i < options.length; i++) {
         var option = $("<option/>").addClass(className).
             val(options[i]).text(options[i]);
-        $("#donation_recur select[name=p3] option:last", form).before(option);
+        $("#donation_recur select[name=srt] option:last", form).before(option);
     }
 }
 
@@ -45,15 +51,17 @@ $(function() {
     $("#donation_amount", form).hide();
     $("#donation_recur", form).hide();
     $("#donation_amount_box", form).hide();
-    $("input:radio[name=srt]", form).prop('checked', false);
-    createOptions(monthlyOptions, 'monthly');
+    $("input:radio[name=src]", form).prop('checked', false);
     
-    $("input:radio[name=srt]", form).change( function() {
+    $("input:radio[name=src]", form).change( function() {
         $("#donation_amount", form).show();
-        if ($(this).val() == "0") {
+        if ($(this).val() == "1") {
             displayRecurring();
+            $("#donation_recur select[name=t3]", form).trigger('change');
         } else {
             displayOnce();
+            $(".monthly").remove();
+            $(".yearly").remove();
         }
     });
     
