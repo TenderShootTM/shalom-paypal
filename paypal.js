@@ -5,8 +5,8 @@
  */
 
 /** Options **/
-var recurringOptions = [ 10, 25, 50 ];
-var onceOptions = [ 25, 50, 100 ];
+var recurringOptions = [ 10, 25, 50, 100, 200 ];
+var onceOptions = [ 50, 100, 200, 500 ];
 var monthlyOptions = [ 3, 6, 12, 24 ];
 var yearlyOptions = [ 1, 2, 3, 5 ];
 var form = "form#paypal";
