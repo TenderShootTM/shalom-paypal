@@ -6,7 +6,9 @@
 
 /** Options **/
 var recurringOptions = [ 10, 25, 50, 100, 200 ];
+var defaultRecurring = 50;
 var onceOptions = [ 50, 100, 200, 500 ];
+var defaultOnce = 200;
 var monthlyOptions = [ 3, 6, 12, 24 ];
 var yearlyOptions = [ 1, 2, 3, 5 ];
 var form = "form#paypal";
@@ -33,7 +35,7 @@ function displayRecurring() {
     $("#donation_recur", form).show();
     $(".donation_once", form).remove();
     createAmountOptions(recurringOptions, "donation_recurring");
-    $("#donation_amount select", form).val(recurringOptions[0]).
+    $("#donation_amount select", form).val(defaultRecurring).
         trigger('change').attr('name', 'a3');
 }
 
@@ -42,7 +44,7 @@ function displayOnce() {
     $("#donation_recur", form).hide();
     $(".donation_recurring", form).remove();
     createAmountOptions(onceOptions, "donation_once");
-    $("#donation_amount select", form).val(onceOptions[0]).
+    $("#donation_amount select", form).val(defaultOnce).
         trigger('change').attr('name', 'amount');
 }
 
