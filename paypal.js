@@ -67,20 +67,21 @@ $(function() {
         }
     });
     
+    var prevVal = 0;
     $("#donation_amount select", form).change( function() {
         if ($(this).val() == 0) {
             var attr = $(this).attr('name');
             $("#donation_amount_box", form).show();
             $("#donation_amount_other").attr('name', attr);
             $(this).attr('name', '');
-            $("label[for=donation_amount_other]", form).text("");
-        } else {
+        } else if (prevVal == 0) {
             var attr = $("#donation_amount_other", form).attr('name');
             $("#donation_amount_box", form).hide();
             $("#donation_amount_other").attr('name', '');
             $(this).attr('name', attr);
-            $("label[for=donation_amount_other]", form).text("");
         }
+        $("label[for=donation_amount_other]", form).text("");
+        prevVal = $(this).val();
     });
     
     $("#donation_recur select[name=t3]", form).change( function() {
